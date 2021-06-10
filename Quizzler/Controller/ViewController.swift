@@ -8,48 +8,31 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    // UI Elements
-    
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var quizProgress: UIProgressView!
     @IBOutlet weak var trueButton: UIButton!
     @IBOutlet weak var falseButton: UIButton!
     
-    // Variables
-    
-    private let quizQuestions = [
-        QuizQuestion(q: "Are you human?", a: "True"),
-        QuizQuestion(q: "Are clouds blue?", a: "False"),
-        QuizQuestion(q: "Moscow is the center of the world!", a: "False")
-    ]
-    
-    //    private let quizQuestions = [
-    //        ["Are you human?", "True"],
-    //        ["Are clouds blue?", "False"],
-    //        ["Moscow is the center of the world!", "False"]
-    //    ]
-    
-    private var questionIndex = 0
+    private var timer: Timer = Timer()
+    private var quizBrain: QuizBrain = QuizBrain()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         updateUI()
     }
-    
-    private var timer: Timer = Timer()
     
     @IBAction func answerButtonClicked(_ sender: UIButton) {
         timer.invalidate()
         let userAnswer = sender.currentTitle
+        
+        
+        quizBrain.checkAnswer(answer: userAnswer)
+        
         //let actualAnswer = quizQuestions[questionIndex][1]
         
         let actualAnswer = quizQuestions[questionIndex].answer
         
-        
-        
-        // Handling answers
+                // Handling answers
         switch userAnswer {
         case actualAnswer:
             sender.backgroundColor = .green
