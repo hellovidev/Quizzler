@@ -19,9 +19,9 @@ class ViewController: UIViewController {
     // Variables
     
     private let quizQuestions = [
-        "Are you human?",
-        "Are clouds blue?",
-        "Moscow is the center of the world!"
+        ["Are you human?", "True"],
+        ["Are clouds blue?", "False"],
+        ["Moscow is the center of the world!", "False"]
     ]
     
     private var questionIndex = 0
@@ -33,12 +33,23 @@ class ViewController: UIViewController {
     }
     
     @IBAction func answerButtonClicked(_ sender: UIButton) {
+        let userAnswer = sender.currentTitle
+        let actualAnswer = quizQuestions[questionIndex][1]
+        
+        // Handling answers
+        switch userAnswer {
+        case actualAnswer:
+            print("Cool!")
+        default:
+            print("Whats wrong with you?")
+        }
+        
         questionIndex += 1
         updateUI()
     }
     
     private func updateUI() {
-        questionLabel.text = quizQuestions[questionIndex]
+        questionLabel.text = quizQuestions[questionIndex][0]
     }
 }
 
