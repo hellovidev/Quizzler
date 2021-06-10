@@ -16,6 +16,18 @@ struct QuizBrain {
     ]
     
     func checkAnswer(answer: String) {
-        
+        if answer == quizQuestions[questionIndex].answer {
+            // User got it right
+        } else {
+            // User got it wrong
+        }
+
+                // Handling answers
+        switch userAnswer {
+        case actualAnswer:
+            sender.backgroundColor = .green
+        default:
+            sender.backgroundColor = .red
+        }
     }
 }

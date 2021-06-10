@@ -25,20 +25,11 @@ class ViewController: UIViewController {
         timer.invalidate()
         let userAnswer = sender.currentTitle
         
-        
-        quizBrain.checkAnswer(answer: userAnswer)
+        quizBrain.checkAnswer(answer: userAnswer!)
         
         //let actualAnswer = quizQuestions[questionIndex][1]
         
-        let actualAnswer = quizQuestions[questionIndex].answer
-        
-                // Handling answers
-        switch userAnswer {
-        case actualAnswer:
-            sender.backgroundColor = .green
-        default:
-            sender.backgroundColor = .red
-        }
+
         
         if quizQuestions.count - 1 > questionIndex {
             questionIndex += 1
