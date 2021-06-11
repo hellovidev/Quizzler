@@ -37,9 +37,6 @@ class ViewController: UIViewController {
 //            sender.backgroundColor = .red
 //        }
 
-        
-
-        
         quizBrain.nextQuestion()
         timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
     }
