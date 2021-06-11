@@ -15,19 +15,24 @@ struct QuizBrain {
         QuizQuestion(q: "Moscow is the center of the world!", a: "False")
     ]
     
-    func checkAnswer(answer: String) {
-        if answer == quizQuestions[questionIndex].answer {
-            // User got it right
+    func checkAnswer(_ answer: String) -> Bool {
+        return answer == quizQuestions[questionIndex].answer
+    }
+    
+    func getProgress() -> Float {
+        return Float(questionIndex + 1) / Float(quizQuestions.count)
+    }
+    
+    func getQuestionDescription() -> String {
+        return quizQuestions[questionIndex].description
+    }
+    
+    mutating func nextQuestion() {
+        if quizQuestions.count - 1 > questionIndex {
+            questionIndex += 1
         } else {
-            // User got it wrong
-        }
-
-                // Handling answers
-        switch userAnswer {
-        case actualAnswer:
-            sender.backgroundColor = .green
-        default:
-            sender.backgroundColor = .red
+            questionIndex = 0
         }
     }
+    
 }

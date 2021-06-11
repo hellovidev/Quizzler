@@ -23,36 +23,32 @@ class ViewController: UIViewController {
     
     @IBAction func answerButtonClicked(_ sender: UIButton) {
         timer.invalidate()
-        let userAnswer = sender.currentTitle
+        let userAnswer = sender.currentTitle!
         
-        quizBrain.checkAnswer(answer: userAnswer!)
+        let isUserGotItRight = quizBrain.checkAnswer(userAnswer)
         
-        //let actualAnswer = quizQuestions[questionIndex][1]
+        // Handling answers
+        sender.backgroundColor = isUserGotItRight ? .green : .red
+        
+        // Alternative handling answers
+//        if isUserGotItRight {
+//            sender.backgroundColor = .green
+//        } else {
+//            sender.backgroundColor = .red
+//        }
+
         
 
         
-        if quizQuestions.count - 1 > questionIndex {
-            questionIndex += 1
-        } else {
-            resetQuiz()
-        }
-        
-        quizProgress.progress = Float(questionIndex + 1) / Float(quizQuestions.count)
-        
+        quizBrain.nextQuestion()
         timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
     }
     
     @objc private func updateUI() {
-        //questionLabel.text = quizQuestions[questionIndex][0]
-        questionLabel.text = quizQuestions[questionIndex].description
+        questionLabel.text = quizBrain.getQuestionDescription()
+        quizProgress.progress = quizBrain.getProgress()
         trueButton.backgroundColor = .clear
         falseButton.backgroundColor = .clear
     }
     
-    private func resetQuiz() {
-        questionIndex = 0
-    }
-    
 }
-
-
