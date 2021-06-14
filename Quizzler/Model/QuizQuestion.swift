@@ -9,15 +9,18 @@ import Foundation
 
 protocol Question {
     var description: String { get set }
-    var answer: String { get set }
+    var answers: [String] { get set }
+    var correctAnswer: String { get set }
 }
 
 struct QuizQuestion: Question {
     var description: String
-    var answer: String
+    var answers: [String]
+    var correctAnswer: String
     
-    init(q: String, a: String) {
+    init(q: String, a: [String], correctAnswer: String) {
         self.description = q
-        self.answer = a
+        self.answers = a
+        self.correctAnswer = correctAnswer
     }
 }
